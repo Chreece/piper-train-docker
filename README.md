@@ -1,6 +1,8 @@
 # piper-train-docker
 
-Image for training a Piper TTS voice from a Hugging Face dataset.
+Image for training a Piper TTS voice easily.
+
+*This only supports single-gpu training currently.*
 
 # Quickstart
 
@@ -14,7 +16,7 @@ See the dataset format [here](https://github.com/rhasspy/piper/blob/master/TRAIN
 
 There is a `metadata.csv` at the root. It looks like this:
 
-`id | utterance`
+`id | text`
 
 Where `id.wav` exists in the `wav` subfolder.
 
@@ -44,3 +46,25 @@ For example: `lessac.ckpt` (assuming `/base_checkpoints/lessac.ckpt` is mounted)
 The files end up in the `/cache` directory. You should mount it if you want to persist the files.
 
 Tensorboard will be started and running on port `6006`. You will need to forward it if you want to use the interface
+
+# Example command
+
+(See 'Generate Dataset' section first)
+
+## With Hugging Face dataset
+
+```shell
+docker run --gpus all -p 6006:6006 -e HF_TOKEN=... -e HF_DATASET=... -e CUDA_VISIBLE_DEVICES=0 -v ./cache:/cache ifansnek/piper-train-docker:latest
+```
+
+## With local dataset
+
+```shell
+docker run --gpus all -p 6006:6006 -e CUDA_VISIBLE_DEVICES=0 -v ./dataset/dataset -v ./cache:/cache ifansnek/piper-train-docker:latest
+```
+
+**Note:**
+
+Sometimes in WSL you will need to use something like `--gpus all --shm-size 32 --ipc=host` for proper CUDA use if you run out of shared memory.
+
+Additionally, you may have to use absolute bind mount paths on Windows.
