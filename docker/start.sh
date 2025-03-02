@@ -8,7 +8,7 @@ fi
 huggingface-cli download rhasspy/piper-checkpoints ${CHECKPOINT} --local-dir /base_checkpoints --repo-type dataset
 
 python3 -m piper_train \
---dataset-dir /cache \
+--dataset-dir /dataset \
 --resume_from_checkpoint /base_checkpoints/${CHECKPOINT} \
 --accelerator ${ACCELERATOR} \
 --batch-size ${BATCH_SIZE} \
