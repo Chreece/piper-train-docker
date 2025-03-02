@@ -24,7 +24,7 @@ ENV HF_TOKEN=""
 ENV HF_DATASET=""
 
 ENV CHECKPOINT="en/en_US/lessac/high/epoch=2218-step=838782.ckpt"
-ENV LANGUAGE="en-us"
+ENV LANGUAGE="el"
 
 ENV NUM_WORKERS=16
 
