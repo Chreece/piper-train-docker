@@ -7,15 +7,6 @@ fi
 
 huggingface-cli download rhasspy/piper-checkpoints ${CHECKPOINT} --local-dir /base_checkpoints --repo-type dataset
 
-python3 -m piper_train.preprocess \
---language ${LANGUAGE} \
---input-dir /dataset \
---output-dir /cache \
---dataset-format ljspeech \
---single-speaker \
---sample-rate 22050 \
---max-workers ${NUM_WORKERS}
-
 python3 -m piper_train \
 --dataset-dir /cache \
 --resume_from_checkpoint /base_checkpoints/${CHECKPOINT} \
