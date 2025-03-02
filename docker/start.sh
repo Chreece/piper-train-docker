@@ -2,7 +2,7 @@ if [[ ! -z ${HF_TOKEN} ]]; then
   huggingface-cli login --token ${HF_TOKEN}
 fi
 if [[ ! -z ${HF_DATASET} ]]; then
-  huggingface-cli download ${HF_DATASET} --local-dir /dataset --repo-type dataset
+  huggingface-cli download ${HF_DATASET} --local-dir /cache --repo-type dataset
 fi
 
 huggingface-cli download rhasspy/piper-checkpoints ${CHECKPOINT} --local-dir /base_checkpoints --repo-type dataset
